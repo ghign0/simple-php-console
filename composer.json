@@ -1,6 +1,6 @@
 {
     "name": "ghign0/console",
-    "version" : "1.1.2",
+    "version" : "1.2",
     "description": "console handle for php cli",
     "type": "library",
     "require": {
