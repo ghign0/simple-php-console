@@ -9,7 +9,9 @@
 namespace Console\Handler;
 
 
+use Console\Command\CommandAdminInterface;
 use Console\Command\CommandInterface;
+use Console\Command\HelpCommand;
 use Console\Model\Command;
 
 class CommandHandler
@@ -33,6 +35,11 @@ class CommandHandler
 
         $this->loadCommands($this->config['commands']);
 
+    }
+
+    public function getCommands()
+    {
+        return $this->commands;
     }
 
 
@@ -77,9 +84,13 @@ class CommandHandler
      *
      * @param $command
      * @param $class
+     * @return null
      */
     public function registerCommand($command, $class)
     {
+        if(!empty($this->commands[$command])) {
+            return null;
+        }
         $this->commands[$command] = new Command($command,$class);
     }
 
@@ -98,6 +109,10 @@ class CommandHandler
 
         /** @var CommandInterface $command */
         $command = new $commandClass();
+
+        if ($command instanceof CommandAdminInterface ) {
+            $command->getConsoleCommands($this->commands);
+        }
 
         return $command->execute();
     }
