@@ -3,8 +3,10 @@
     "description": "console handle for php cli",
     "type": "composer-plugin",
     "require": {
-        "codedungeon/php-cli-colors": "^1.10",
-        "nikic/fast-route": "dev-master"
+        "codedungeon/php-cli-colors": "^1.10"
+    },
+    "extra"  : {
+        "class" : "Console\\Console"
     },
     "autoload" : {
         "psr-4" : {
