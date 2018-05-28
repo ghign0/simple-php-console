@@ -23,10 +23,14 @@ class Console
     /**
      * Console constructor.
      */
-    public function __construct()
+    public function __construct(array $externalCommands)
     {
         $this->consoleHandler = new ConsoleHandler( new Bash() );
         $this->commandHandler = new CommandHandler();
+
+        if (!is_null($externalCommands)) {
+            $this->registerExternalCommands($externalCommands);
+        }
 
         $this->welcome();
         $helpList = $this->execute_command('help');
@@ -65,6 +69,12 @@ class Console
     private function execute_command( string $command )
     {
         return $this->commandHandler->handle($command);
+    }
+
+
+    private function registerExternalCommands(array $externalCommands)
+    {
+        $this->commandHandler->registerExternalCommands($externalCommands);
     }
 
 

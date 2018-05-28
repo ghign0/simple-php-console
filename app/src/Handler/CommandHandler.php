@@ -9,7 +9,9 @@
 namespace Console\Handler;
 
 
+use Console\Command\CommandAdminInterface;
 use Console\Command\CommandInterface;
+use Console\Command\HelpCommand;
 use Console\Model\Command;
 
 class CommandHandler
@@ -35,19 +37,23 @@ class CommandHandler
 
     }
 
+    public function getCommands()
+    {
+        return $this->commands;
+    }
+
 
     /**
      * load commnds from configuration files
      *
      * @param array $commandConfiguration
      */
-    public function loadCommands( array $commandConfiguration )
+    private function loadCommands( array $commandConfiguration )
     {
         foreach ($commandConfiguration as $command => $class) {
             $this->commands[$command] = new Command( $command, $class );
         }
     }
-
 
     /**
      * add a command object to library
@@ -61,13 +67,30 @@ class CommandHandler
 
 
     /**
+     * register new commands from other sourcres
+     *
+     * @param array $externalCommands
+     */
+    public function registerExternalCommands(array $externalCommands)
+    {
+        foreach ($externalCommands as $command => $class) {
+            $this->registerCommand($command, $class);
+        }
+    }
+
+
+    /**
      * Register new command object and addd it to library
      *
      * @param $command
      * @param $class
+     * @return null
      */
     public function registerCommand($command, $class)
     {
+        if(!empty($this->commands[$command])) {
+            return null;
+        }
         $this->commands[$command] = new Command($command,$class);
     }
 
@@ -87,9 +110,12 @@ class CommandHandler
         /** @var CommandInterface $command */
         $command = new $commandClass();
 
+        if ($command instanceof CommandAdminInterface ) {
+            $command->getConsoleCommands($this->commands);
+        }
+
         return $command->execute();
     }
-
 
 
 
