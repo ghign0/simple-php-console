@@ -41,13 +41,12 @@ class CommandHandler
      *
      * @param array $commandConfiguration
      */
-    public function loadCommands( array $commandConfiguration )
+    private function loadCommands( array $commandConfiguration )
     {
         foreach ($commandConfiguration as $command => $class) {
             $this->commands[$command] = new Command( $command, $class );
         }
     }
-
 
     /**
      * add a command object to library
@@ -57,6 +56,19 @@ class CommandHandler
     public function addCommand( Command $command )
     {
         $this->commands[$command->getCommand()] = $command;
+    }
+
+
+    /**
+     * register new commands from other sourcres
+     *
+     * @param array $externalCommands
+     */
+    public function registerExternalCommands(array $externalCommands)
+    {
+        foreach ($externalCommands as $command => $class) {
+            $this->registerCommand($command, $class);
+        }
     }
 
 
@@ -89,7 +101,6 @@ class CommandHandler
 
         return $command->execute();
     }
-
 
 
 
