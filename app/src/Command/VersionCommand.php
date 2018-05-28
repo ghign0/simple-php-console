@@ -22,7 +22,7 @@ class VersionCommand extends AbstractCommand implements CommandInterface
 
     public function execute()
     {
-        return "1.0";
+        return "Simple PHP console - version 1.1.2.\n";
     }
 
 
