@@ -10,6 +10,6 @@ return [
     'commands' => [
         'help'              =>  \Console\Command\HelpCommand::class,
         'quit'              =>  \Console\Command\QuitCommand::class,
-        'version'           =>  \Console\Command\VersionCommand::class
+        #'version'           =>  \Console\Command\VersionCommand::class
     ],
 ];
