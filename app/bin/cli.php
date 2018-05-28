@@ -10,7 +10,9 @@ include __DIR__."/../../vendor/autoload.php";
 
 use Console\Console;
 
-$console = new Console();
+$console = new Console([
+    'version' => \Console\Command\VersionCommand::class
+]);
 $console->run();
 
 
