@@ -1,12 +1,9 @@
 {
     "name": "ghign0/console",
     "description": "console handle for php cli",
-    "type": "composer-plugin",
+    "type": "library",
     "require": {
         "codedungeon/php-cli-colors": "^1.10"
-    },
-    "extra"  : {
-        "class" : "Console\\Console"
     },
     "autoload" : {
         "psr-4" : {
