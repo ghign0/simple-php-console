@@ -15,16 +15,25 @@ class QuitCommand extends AbstractCommand implements CommandInterface
     /** @var string  */
     private $command;
 
+    /**
+     * QuitCommand constructor.
+     */
     public function __construct()
     {
         $this->command = 'quit';
     }
 
+    /**
+     * @return string|void
+     */
     public function execute()
     {
         exit(0);
     }
 
+    /**
+     * @return string
+     */
     public function help()
     {
         return "esce dal  programma";
