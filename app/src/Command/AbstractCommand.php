@@ -11,5 +11,6 @@ namespace Console\Command;
 
 abstract class AbstractCommand
 {
+    /** @var string */
     private $command ;
 }

@@ -14,6 +14,11 @@ use Codedungeon\PHPCliColors\Color;
 use Console\Handler\CommandHandler;
 use Console\Model\Console;
 
+
+/**
+ * Class HelpCommand
+ * @package Console\Command
+ */
 final class HelpCommand extends AbstractCommand implements CommandInterface, CommandAdminInterface
 {
 
@@ -23,12 +28,21 @@ final class HelpCommand extends AbstractCommand implements CommandInterface, Com
     /** @var mixed  */
     private $commands;
 
+    /**
+     * HelpCommand constructor.
+     */
     public function __construct()
     {
         $this->command = 'help';
         $this->commands = include CommandHandler::CONFIG;
     }
 
+
+    /**
+     * print the list of help message for each command
+     *
+     * @return string
+     */
     public function execute()
     {
 
@@ -45,16 +59,27 @@ final class HelpCommand extends AbstractCommand implements CommandInterface, Com
 
     }
 
+
+    /**
+     * @return string
+     */
     public function help()
     {
         return "Stampa lista dei comandi";
     }
 
+    /**
+     * @return string
+     */
     public function getCommand()
     {
         return $this->command;
     }
 
+    /**
+     * @param \Console\Model\Command[] $commands
+     * @return \Console\Model\Command[]|void
+     */
     public function getConsoleCommands( $commands )
     {
         $this->commands = $commands;
